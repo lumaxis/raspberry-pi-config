@@ -1,0 +1,26 @@
+- name: Set device name
+  community.general.ini_file:
+    path: /etc/default/raspotify
+    section:
+    option: DEVICE_NAME
+    value: '{{ device_name }}'
+    no_extra_spaces: yes
+  notify: Restart raspotify
+
+- name: Set bitrate
+  community.general.ini_file:
+    path: /etc/default/raspotify
+    section:
+    option: BITRATE
+    value: '{{ bitrate }}'
+    no_extra_spaces: yes
+  notify: Restart raspotify
+
+- name: Set device type
+  community.general.ini_file:
+    path: /etc/default/raspotify
+    section:
+    option: DEVICE_TYPE
+    value: '{{ device_type }}'
+    no_extra_spaces: yes
+  notify: Restart raspotify

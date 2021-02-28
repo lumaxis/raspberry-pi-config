@@ -1,0 +1,22 @@
+- name: Install Node.js
+  become: yes
+  block:
+  - name: Add nodesource key
+    ansible.builtin.apt_key:
+      url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+      id: 1655A0AB68576280
+
+  - name: Read current Debian release
+    ansible.builtin.command: lsb_release -s -c
+    register: debian_release
+    when: not ansible_check_mode
+
+  - name: Add NodeSource repository
+    ansible.builtin.apt_repository:
+      repo: 'deb https://deb.nodesource.com/node_{{ node_version }}.x {{ debian_release.stdout | default("buster") }} main'
+      filename: /etc/apt/sources.list.d/nodesource
+
+  - name: Install package
+    apt:
+      name: nodejs
+      state: latest

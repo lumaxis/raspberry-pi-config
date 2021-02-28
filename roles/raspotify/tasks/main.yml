@@ -1,0 +1,21 @@
+- name: Add and install Raspotify package
+  become: yes
+  block:
+  - name: Add raspotify key
+    ansible.builtin.apt_key:
+      url: https://dtcooper.github.io/raspotify/key.asc
+
+  - name: Add raspotify repository
+    ansible.builtin.apt_repository:
+      repo: deb https://dtcooper.github.io/raspotify raspotify main
+
+  - name: Install raspotify
+    apt:
+      name: raspotify
+      state: latest
+
+- name: Configure ALSA
+  import_role:
+    name: alsa
+
+- include: configure.yml

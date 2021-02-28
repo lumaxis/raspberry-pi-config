@@ -1,0 +1,29 @@
+- name: Set defaults.ctl.card
+  ansible.builtin.lineinfile:
+    path: /usr/share/alsa/alsa.conf
+    regexp: '(defaults\.ctl\.card)\s+\d'
+    backrefs: yes
+    line: '\1 1'
+  notify: Reboot for ALSA
+
+- name: Set defaults.pcm.card
+  ansible.builtin.lineinfile:
+    path: /usr/share/alsa/alsa.conf
+    regexp: '(defaults\.pcm\.card)\s+\d'
+    backrefs: yes
+    line: '\1 1'
+  notify: Reboot for ALSA
+
+- name: Set defaults.pcm.dmix.rate
+  ansible.builtin.lineinfile:
+    path: /usr/share/alsa/alsa.conf
+    regexp: '(defaults\.pcm\.dmix\.rate)\s+\d'
+    backrefs: yes
+    line: '\1 44100'
+  notify: Reboot for ALSA
+
+- name: Disable ALSA's Dynamic Audio Power Management (DAPM)
+  ansible.builtin.lineinfile:
+    path: /etc/modprobe.d/snd_soc_core.conf
+    line: 'options snd_soc_core pmdown_time -1'
+  notify: Reboot for ALSA

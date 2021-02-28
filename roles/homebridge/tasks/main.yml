@@ -1,0 +1,28 @@
+- name: Install Homebridge and required packages
+  become: yes
+  block:
+  - name: Install required packages
+    apt:
+      pkg:
+        - gcc
+        - g++
+        - make
+        - python
+        - net-tools
+
+  - name: Install "homebridge" package globally
+    community.general.npm:
+      name: homebridge
+      state: latest
+      global: yes
+      unsafe_perm: yes
+
+  - name: Install "homebridge-config-ui-x" package globally
+    community.general.npm:
+      name: homebridge-config-ui-x
+      state: latest
+      global: yes
+      unsafe_perm: yes
+
+  - name: Setup Homebridge as a service
+    ansible.builtin.command: hb-service install --user homebridge
