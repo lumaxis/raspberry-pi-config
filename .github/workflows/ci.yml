@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  lint:
+    name: Run ansible-lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: ansible-lint
+        uses: ansible/ansible-lint-action@master
+        with:
+          targets: |
+            setup-raspberry-pi.yml
+            update-raspbian.yml
