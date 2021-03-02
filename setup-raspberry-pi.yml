@@ -1,18 +1,16 @@
 - name: Setup a new Raspberry pi
   hosts: all
-  tasks:
+  pre_tasks:
     - name: Ensure en_US locale exists
       community.general.locale_gen:
         name: en_US.UTF-8
         state: present
 
+  roles:
     - name: Install raspotify
-      import_role:
-        name: raspotify
-      vars:
-        device_name: '"Schreibtisch"'
-        bitrate: '"320"'
+      role: raspotify
+      device_name: '"Schreibtisch"'
+      bitrate: '"320"'
 
     - name: Install Homebridge
-      import_role:
-        name: homebridge
+      role: homebridge
