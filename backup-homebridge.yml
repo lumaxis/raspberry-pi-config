@@ -1,0 +1,19 @@
+- name: Backup Homebridge and all its config
+  hosts: all
+  tasks:
+    - name: Download config.json
+      ansible.builtin.fetch:
+        src: /var/lib/homebridge/config.json
+        dest: roles/homebridge/files/
+        flat: yes
+
+    - name: Compress directory /var/lib/homebridge into ~/homebridge-backup.tgz
+      community.general.archive:
+        path: /var/lib/homebridge
+        dest: ~/homebridge-backup.tgz
+
+    - name: Download backup archive
+      ansible.builtin.fetch:
+        src: ~/homebridge-backup.tgz
+        dest: roles/homebridge/files/
+        flat: yes
