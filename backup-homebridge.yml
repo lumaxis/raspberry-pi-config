@@ -7,6 +7,11 @@
         dest: roles/homebridge/files/
         flat: yes
 
+    - name: Encrypt config.json
+      local_action:
+        module: ansible.builtin.command
+        cmd: ansible-vault encrypt roles/homebridge/files/config.json
+
     - name: Compress directory /var/lib/homebridge into ~/homebridge-backup.tgz
       community.general.archive:
         path: /var/lib/homebridge
@@ -15,5 +20,10 @@
     - name: Download backup archive
       ansible.builtin.fetch:
         src: ~/homebridge-backup.tgz
-        dest: roles/homebridge/files/
+        dest: roles/homebridge/files/backup.tgz
         flat: yes
+
+    - name: Encrypt config.json
+      local_action:
+        module: ansible.builtin.command
+        cmd: ansible-vault encrypt roles/homebridge/files/backup.tgz
