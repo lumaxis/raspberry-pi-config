@@ -1,0 +1,13 @@
+- name: Install plugins
+  community.general.npm:
+    name: "{{ item }}"
+    path: /usr/local/lib
+    state: latest
+  notify: Restart Homebridge
+  loop:
+    - homebridge-hue
+    - homebridge-keylights
+    - homebridge-philips-air
+    - homebridge-plex-sensors
+    - homebridge-rademacher-homepilot
+    - homebridge-shell-switch

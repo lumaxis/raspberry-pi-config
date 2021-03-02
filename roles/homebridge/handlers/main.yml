@@ -1,0 +1,3 @@
+- name: Restart Homebridge
+  ansible.builtin.command: hb-service restart
+  become: yes

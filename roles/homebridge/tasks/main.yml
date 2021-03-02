@@ -16,6 +16,7 @@
       state: latest
       global: yes
       unsafe_perm: yes
+    notify: Restart Homebridge
 
   - name: Install "homebridge-config-ui-x" package globally
     community.general.npm:
@@ -23,6 +24,13 @@
       state: latest
       global: yes
       unsafe_perm: yes
+    notify: Restart Homebridge
+
+  - include: packages.yml
+
+  - name: Populate service facts
+    ansible.builtin.service_facts:
 
   - name: Setup Homebridge as a service
     ansible.builtin.command: hb-service install --user homebridge
+    when: ansible_facts.services["homebridge.service"] is not defined
