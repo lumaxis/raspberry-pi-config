@@ -1,0 +1,8 @@
+- name: Restore Homebridge backup
+  hosts: all
+  tasks:
+    - name: Extract backup.tgz into /var/lib/homebridge
+      ansible.builtin.unarchive:
+        src: roles/homebridge/files/backup.tgz
+        dest: /var/lib
+      become: yes

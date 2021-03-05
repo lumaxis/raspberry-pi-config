@@ -1,0 +1,2 @@
+roles/homebridge/files/backup.tgz filter=lfs diff=lfs merge=lfs -text
+roles/homebridge/files/config.json filter=lfs diff=lfs merge=lfs -text
