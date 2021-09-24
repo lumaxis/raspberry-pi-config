@@ -1,13 +1,22 @@
 - name: Install plugins
   community.general.npm:
     name: "{{ item }}"
-    path: /usr/local/lib
+    global: yes
     state: latest
   notify: Restart Homebridge
   loop:
     - homebridge-hue
     - homebridge-keylights
-    - homebridge-philips-air
     - homebridge-plex-sensors
     - homebridge-rademacher-homepilot
     - homebridge-shell-switch
+- name: Install plugins with unsafe_perms
+  become: yes
+  community.general.npm:
+    name: "{{ item }}"
+    global: yes
+    state: latest
+    unsafe_perm: yes
+  notify: Restart Homebridge
+  loop:
+    - homebridge-philips-air
