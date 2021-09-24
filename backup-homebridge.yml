@@ -23,7 +23,7 @@
         dest: roles/homebridge/files/backup.tgz
         flat: yes
 
-    - name: Encrypt config.json
+    - name: Encrypt backup archive
       local_action:
         module: ansible.builtin.command
         cmd: ansible-vault encrypt roles/homebridge/files/backup.tgz
