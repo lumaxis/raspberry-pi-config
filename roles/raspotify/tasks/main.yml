@@ -18,4 +18,4 @@
   import_role:
     name: alsa
 
-- include: configure.yml
+- include_tasks: configure.yml

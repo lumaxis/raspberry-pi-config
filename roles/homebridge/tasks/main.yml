@@ -26,7 +26,7 @@
       unsafe_perm: yes
     notify: Restart Homebridge
 
-  - include: packages.yml
+  - include_tasks: packages.yml
 
   - name: Populate service facts
     ansible.builtin.service_facts:
