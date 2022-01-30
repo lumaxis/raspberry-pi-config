@@ -4,11 +4,13 @@
   - name: Install required packages
     apt:
       pkg:
-        - gcc
         - g++
+        - gcc
+        - git
         - make
-        - python
         - net-tools
+        - python
+        - python3-pip
 
   - name: Install "homebridge" package globally
     community.general.npm:

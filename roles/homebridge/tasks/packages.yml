@@ -19,4 +19,4 @@
     unsafe_perm: yes
   notify: Restart Homebridge
   loop:
-    - homebridge-philips-air
+    - homebridge-philipsair-platform
