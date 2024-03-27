@@ -17,9 +17,4 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: ansible-lint
-        uses: ansible/ansible-lint-action@main
-        with:
-          targets: |
-            setup-raspberry-pi.yml
-            update-raspbian.yml
-          args: "-x 403"
+        uses: ansible/ansible-lint@main
